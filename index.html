@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="stylesheet" href="css/initialize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="images/lunchFavicon.png" type="image/x-icon">
+
+
+  <title>Let's do Each Other</title>
+</head>
+
+<body>
+
+      <!--nav-->
+
+    <nav>
+      <div class="nav-wrapper green accent-4">
+        <a href="#" class="brand-logo center">👉👌</a>
+      </div>
+    </nav>
+
+    <!--main content-->
+
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <div class="section">
+          <div class="card group center" id="form">
+            <div class="card-content">
+              <span class="card-title"> Welcome to 👉👌</span>
+              <p>let's start by signing you up!</p>
+              <div class="input-field col s12">
+                <input id="email" type="email" class="validate" required="required">
+                <label for="email">Email</label>
+                <span class="helper-text" data-error="invalid email" data-success="valid email"></span>
+                </div>
+                <div class="input-field col s12">
+                    <input id="password" type="password" class="validate" required="required">
+                    <label for="password">Password</label>
+                    </div>
+                    <button id="submit" class="btn waves-effect waves-light center-align" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                      </button>
+                </div>
+
+                </div>
+              
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col s12">
+                  <div class="section">
+                      <div class="card group center" id="form2">
+                        <div class="card-content">
+                            <div class="input-field col s8">
+                                <input id="username" type="text" class="validate" required="required">
+                                <label for="username">Username</label>
+                              </div>
+                              
+                                <div class="input-field col s4">
+                                    <a href="#" id="upload_widget_opener"class="waves-effect waves-light btn-large"><i class="material-icons left">camera_alt</i>Upload Image</a>
+                                </div>
+                                <div class="input-field col s12">
+                                  <select id="me" required="required"> 
+                                    <option value="" disabled selected>I am a...</option>
+                                    <option value="1">👉</option>
+                                    <option value="2">👌</option>
+                                  </select>
+                                </div>
+                                <div class="input-field col s12">
+                                  <select multiple id="them" required="required">
+                                      <option value="" disabled selected>looking for...</option>
+                                    <option value="1">👉</option>
+                                    <option value="2">👌</option>
+                                  </select>
+                                </div>
+                                <div class="input-field col s12">                  
+                                  <button id="submitDeets" class="btn waves-effect waves-light center-align" type="submit" name="action">Submit
+                                    <i class="material-icons right">send</i>
+                                  </button>
+                                </div>
+            
+                            </div>
+                          
+            
+                          </div>
+                        </div>
+              </div>
+            </div>
+      </div>
+
+
+
+
+     
+
+
+
+
+
+
+
+      <script src="js/jquery.min.js" charset="utf-8"></script>
+      <script async src="https://static.addtoany.com/menu/page.js"></script>
+      <script src="js/questionaire.js"></script>
+      <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+  
+      
+      
+      <script type="text/javascript">
+      var image= ""
+      var uid= ""
+      $("#form2").hide();
+       //need this for selection
+       $(document).ready(function(){
+        $('select').formSelect();
+      });
+  
+       // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBVmh4MOh9S7BWmU0-k89SFbUt9-eWJv1M",
+        authDomain: "datingapp-10bf4.firebaseapp.com",
+        databaseURL: "https://datingapp-10bf4.firebaseio.com",
+        projectId: "datingapp-10bf4",
+        storageBucket: "datingapp-10bf4.appspot.com",
+        messagingSenderId: "884941057724"
+      };
+      firebase.initializeApp(config);
+
+
+      //validating email
+
+      function checkEmail(mail,bool) {
+
+      var filter = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+      console.log(mail);
+
+      if (filter.test(mail)) {
+        return true
+      console.log(true)      
+      }
+
+      else {
+        return false
+        console.log(false)      
+      }
+
+      }
+
+      function allLetter(inputtxt)
+      {
+      var filter = /^[0-9a-zA-Z]+$/;
+      if(filter.test(inputtxt))
+        {
+          return true;
+        }
+      else
+        {
+        return false;
+        }
+      }
+
+      document.getElementById("upload_widget_opener").addEventListener("click", function() {
+          cloudinary.openUploadWidget({ cloud_name: 'letsdoeachother', upload_preset: 'huhcfsta', cropping: 'server',cropping_aspect_ratio: 1 ,folder: 'user_photos', sources: [ 'local', 'url', 'facebook', 'instagram', 'dropbox', 'camera'], theme: 'minimal'}, 
+          function(error, result) { console.log(error, result); image="http://res.cloudinary.com/letsdoeachother/image/upload/"+result[0].path; console.log(image) });
+          }, false);
+    
+    //onclick for submit- send data to auth server and move to next page, all after validating the email
+    $("#submit").on("click", function(){
+      //collecting data from form
+      var email= $("#email").val().trim()
+      var password=$("#password").val();
+      var emailBool=checkEmail(email);
+      if (emailBool){
+        console.log(emailBool)
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        //Handle Errors here.
+        if (error) throw error
+        console.log ("a.ok")
+        
+      });
+    }else  {
+        console.log(emailBool)
+        alert("Please enter a valid email address")
+      }
+     
+    })
+
+
+
+          function loginandStoredata(){
+          console.log("YAY!")
+          $("#form").slideUp();
+          $("#form2").slideDown();
+          var name= $("#name").val().trim()
+          var me= $("#me").val()
+          var them= $("#them").val()
+          firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            if (error) throw (error)
+            else{
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                      // User is signed in.
+                        var uid = user.uid;
+                        var email= user.email;
+                        function writeUserData(userId, name, email, imageUrl, me, them) {
+                            firebase.database().ref('users/' + userId).set({
+                            uid:userId,
+                            name: name,
+                            me:me,
+                            them:them,
+                            email: email,
+                            profile_picture : imageUrl
+                            });
+                            }
+                            writeUserData(uid, name, email, image, me, them);
+
+                    } else {
+                     
+                    }
+                    
+            })
+          }
+        })
+      }
+      
+
+
+
+      </script>
+
+
+</body>
+
+</html>
